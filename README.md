@@ -69,3 +69,5 @@ by changing the IP address in the `TEST_BASE_API_URL` constant.
 - To test the app using the live backend server, either build the release version of the app or assign `http://34.67.115.110/api/v1.0/` to the `TEST_BASE_API_URL` constant.
 - Connect a real device or start the emulator.
 - Run the app from android studio.
+
+[Here](mobile/app/release/app-release.apk) is the release built (apk) of the app.
