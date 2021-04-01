@@ -1,0 +1,12 @@
+.view-icon{
+    cursor:pointer;
+    display:inline-block;
+    color:#4682B4;
+    padding-left:10px;
+    margin: 0 auto;
+}
+
+.modal-body{
+
+    padding:30px;
+}

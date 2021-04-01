@@ -1,0 +1,162 @@
+{% extends 'portal/base.html' %}
+{% block pagetabtitle %}Quizzes{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- End Course Details -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        {% if lesson %}
+                        <li class="breadcrumb-item"><a href="{% url 'portal:lessons' %}">All Lessons</a></li>
+                        {% endif %}
+                        <li class="breadcrumb-item active" aria-current="page">Quizzes</li>
+                    </ol>
+                </nav>
+
+                {% if lesson %}
+                <h1>{{lesson.title}}</h1>
+                <a href="{% url 'portal:quiz_create_update' lesson.id %}"
+                    class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                    <span class="btn-label"><i class="fa fa-plus"></i></span>Add Quiz
+                    {% else %}
+                    <h1>Quizzes</h1>
+                    {% endif %}
+                </a>
+
+                <hr>
+                <!-- Search bar -->
+                <form class="col-md-7 mx-auto mb-2">
+                    <div class="form-row">
+                        <div class="col-8">
+                            <input type="text" class="form-control" value="{{query}}" name="query"
+                                placeholder="Search for ...">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+                {% if request.message %}
+                <div class="col-md-7 mx-auto alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>Info! </strong> {{request.message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if request.error_message %}
+                <div class="col-md-7 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error! </strong> {{request.error_message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                <div class="col-md-12 col-lg-12 col-sm-12 row">
+                    {% for quiz in quizzes %}
+                    <div class="card" style="width: 40rem; padding: 5px; border: 0.2em solid rgb(230, 230, 230);">
+                        <div class="card-body">
+                            <h5 class="card-title">{{quiz.question}}</h5>
+                            <div class="card-text">
+                                {% for option in quiz.answer_options.all %}
+                                <div class="form-check form-check-inline">
+                                    <input disabled {% if option == quiz.correct_option %} checked {% endif %}
+                                        class="form-check-input" id="option{{option.id}}" type="radio"
+                                        value="{{option.text}}">
+                                    <label class="form-check-label" for="option{{option.id}}">{{option.text}}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <br>
+                            <a href="{% url 'portal:quiz_create_update' quiz.lesson.id %}?id={{quiz.id}}"
+                                class="btn btn-primary">Edit</a>
+                            <button data-toggle="modal" onclick="showDeletionModal('{{quiz.id}}')"
+                                class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if quizzes.has_other_pages %}
+                <nav aria-label="Page navigation example">
+
+                    <ul class="pagination justify-content-center">
+                        {% if quizzes.has_previous %}
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{ quizzes.previous_page_number }}">Previous</a></li>
+                        {% else %}
+                        <li class="page-item disabled page-link"><span>Previous</span></li>
+                        {% endif %}
+                        {% for i in quizzes.paginator.page_range %}
+                        {% if quizzes.number == i %}
+                        <li class="page-item page-link active"><span>{{ i }} <span
+                                    class="sr-only">(current)</span></span></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if quizzes.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ quizzes.next_page_number }}">Next</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled page-link"><span>Next</span></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="QuizzesModal" tabindex="-1" role="dialog" aria-labelledby="QuizzesModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="QuizzesModalLabel">Delete Quizzes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'portal:quiz_delete' %}" method="POST">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <input type="hidden" name="quiz_id" id="quiz_id">
+                    <strong class="text text-danger">This operation is irreversible. Continue?</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Yap</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scriptsblock %}
+
+<script>
+    function showDeletionModal(quiz_id) {
+        document.getElementById("quiz_id").value = quiz_id
+        $("#QuizzesModal").modal("show");
+    }
+</script>
+
+{% endblock %}

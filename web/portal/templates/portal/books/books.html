@@ -1,0 +1,145 @@
+{% extends 'portal/base.html' %}
+{% block pagetabtitle %}Books{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- End Book Details -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Books</li>
+                    </ol>
+                </nav>
+
+                <h1>Available Books</h1>
+
+                <a href="{% url 'portal:book_create_update' %}"
+                    class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                    <span class="btn-label"><i class="fa fa-plus"></i></span>Add Book
+                </a>
+                <hr>
+                <!-- Search bar -->
+                <form class="col-md-7 mx-auto mb-2">
+                    <div class="form-row">
+                        <div class="col-8">
+                            <input type="text" class="form-control" value="{{query}}" name="query"
+                                placeholder="Search for ...">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+                {% if request.message %}
+                <div class="col-md-7 mx-auto alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>Info! </strong> {{request.message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if request.error_message %}
+                <div class="col-md-7 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error! </strong> {{request.error_message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                <div class="col-md-12 col-lg-12 col-sm-12 row">
+                    {% for book in books %}
+                    <div class="card" style="width: 18rem; padding: 5px; border: 1px solid rgb(230, 230, 230);">
+                        <img class="card-img-top" src="{{book.image.url}}" alt="{{book.title" style="height: 12em;">
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{book.title}}</h5>
+                            <p class="card-text">{{book.description}}</p>
+                            <small class="text text-muted">By: {{book.author}}</small>
+                            <p><a href="{{book.file.url}}" class="badge badge-primary">Preview</a></p>
+                            <a href="{% url 'portal:book_create_update' %}?id={{book.id}}"
+                                class="btn btn-primary">Edit</a>
+                            <button data-toggle="modal" onclick="showDeletionModal('{{book.id}}')"
+                                class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if books.has_other_pages %}
+                <nav aria-label="Page navigation example">
+
+                    <ul class="pagination justify-content-center">
+                        {% if books.has_previous %}
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{ books.previous_page_number }}">Previous</a></li>
+                        {% else %}
+                        <li class="page-item disabled page-link"><span>Previous</span></li>
+                        {% endif %}
+                        {% for i in books.paginator.page_range %}
+                        {% if books.number == i %}
+                        <li class="page-item page-link active"><span>{{ i }} <span
+                                    class="sr-only">(current)</span></span></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if books.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ books.next_page_number }}">Next</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled page-link"><span>Next</span></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="BookModal" tabindex="-1" role="dialog" aria-labelledby="BookModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="BookModalLabel">Delete Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'portal:book_delete' %}" method="POST">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <input type="hidden" name="book_id" id="book_id">
+                    <strong class="text text-danger">This operation is irreversible. Continue?</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Yap</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scriptsblock %}
+
+<script>
+    function showDeletionModal(book_id) {
+        document.getElementById("book_id").value = book_id
+        $("#BookModal").modal("show");
+    }
+</script>
+
+{% endblock %}

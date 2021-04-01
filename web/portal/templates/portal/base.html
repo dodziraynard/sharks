@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Sharks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="An education app platform for Ghanaian pre-tertiary students." name="description" />
+    <meta content="Sharks" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="{% static 'assets/sharks.png'  %}">
+
+    <!-- Plugins css -->
+    <link href="{% static 'backendassets/libs/flatpickr/flatpickr.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'backendassets/libs/selectize/css/selectize.bootstrap3.css' %}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- App css -->
+    <link href="{% static 'backendassets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"
+        id="bs-default-stylesheet" />
+    <link href="{% static 'backendassets/css/app.min.css' %}" rel="stylesheet" type="text/css"
+        id="app-default-stylesheet" />
+
+    <link href="{% static 'backendassets/css/bootstrap-dark.min.css' %}" rel="stylesheet" type="text/css"
+        id="bs-dark-stylesheet" />
+    <link href="{% static 'backendassets/css/app-dark.min.css' %}" rel="stylesheet" type="text/css"
+        id="app-dark-stylesheet" />
+
+    <!-- icons -->
+    <link href="{% static 'backendassets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+
+
+    <!-- third party css -->
+    <link href="{% static 'backendassets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+        type="text/css" />
+    <link href="{% static 'backendassets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+        rel="stylesheet" type="text/css" />
+    <link href="{% static 'backendassets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}"
+        rel="stylesheet" type="text/css" />
+    <link href="{% static 'backendassets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css' %}"
+        rel="stylesheet" type="text/css" />
+    <!-- third party css end -->
+
+    <!-- Plugins css -->
+    <link href="{% static 'backendassets/libs/dropzone/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'backendassets/libs/dropify/css/dropify.min.css' %}" rel="stylesheet" type="text/css" />
+
+
+    <link href="{% static 'backendassets/libs/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- Custom CSS -->
+    <link href="{% static 'backendassets/css/custom.css' %}" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body class="loading"
+    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Topbar Start -->
+        <div class="navbar-custom">
+            <div class="container-fluid">
+                <ul class="list-unstyled topnav-menu float-right mb-0">
+
+                    <li class="dropdown d-none d-lg-inline-block">
+                        <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen"
+                            href="#">
+                            <i class="fe-maximize noti-icon"></i>
+                            Hi {{request.user.username|title}}!
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                    <li>
+                        <button class="button-menu-mobile waves-effect waves-light">
+                            <i class="fe-menu"></i>
+                        </button>
+                    </li>
+
+                    <li>
+                        <!-- Mobile menu toggle (Horizontal Layout)-->
+                        <a class="navbar-toggle nav-link" data-toggle="collapse" data-target="#topnav-menu-content">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </li>
+
+                    <li class="dropdown d-xl-block">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="false" aria-expanded="false"
+                            onclick="window.location.reload();">
+                            Refresh
+                        </a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- end Topbar -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu">
+
+            <div class="h-100" data-simplebar>
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+
+                    <ul id="side-menu">
+
+                        <li class="menu-title">Navigation</li>
+
+                        <li>
+                            <a href="{% url 'portal:courses' %}">
+                                <i data-feather="calendar"></i>
+                                <span> Courses </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'portal:lessons' %}">
+                                <i data-feather="calendar"></i>
+                                <span> Lessons </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'portal:quizzes' %}">
+                                <i data-feather="message-square"></i>
+                                <span> Quizzes </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'portal:scholarships' %}">
+                                <i data-feather="message-square"></i>
+                                <span> Scholarships </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'portal:books' %}">
+                                <i data-feather="message-square"></i>
+                                <span> Books </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'authentication:user_logout' %}">
+                                <i class="fa fa-lock"></i>
+                                <span> Log out </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+
+                                <h4 class="page-title">{% block pagetitle %} {% endblock %}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    {% block content %}{% endblock %}
+
+                </div> <!-- container -->
+
+            </div> <!-- content -->
+
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <script>document.write(new Date().getFullYear())</script> &copy; Shark. | <a href="/">Visit
+                                Website</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript:void(0);">About Us</a>
+                                <a href="javascript:void(0);">Help</a>
+                                <a href="javascript:void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+    </div>
+    <!-- END wrapper -->
+
+
+    <!-- Vendor js -->
+    <script src="{% static 'backendassets/js/vendor.min.js' %}"></script>
+
+    <!-- Plugins js-->
+    <script src="{% static 'backendassets/libs/flatpickr/flatpickr.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/apexcharts/apexcharts.min.js' %}"></script>
+
+    <script src="{% static 'backendassets/libs/selectize/js/standalone/selectize.min.js' %}"></script>
+
+    <!-- Dashboar 1 init js-->
+    <script src="{% static 'backendassets/js/pages/dashboard-1.init.js' %}"></script>
+
+    <!-- App js-->
+    <script src="{% static 'backendassets/js/app.min.js' %}"></script>
+
+    <!-- third party js -->
+    <script src="{% static 'backendassets/libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script
+        src="{% static 'backendassets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/datatables.net-select/js/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/pdfmake/build/pdfmake.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/pdfmake/build/vfs_fonts.js' %}"></script>
+    <!-- third party js ends -->
+
+    <!-- Datatables init -->
+    <script src="{% static 'backendassets/js/pages/datatables.init.js' %}"></script>
+
+    <!-- Plugins js -->
+    <script src="{% static 'backendassets/libs/dropzone/min/dropzone.min.js' %}"></script>
+    <script src="{% static 'backendassets/libs/dropify/js/dropify.min.js' %}"></script>
+
+    <!-- Init js-->
+    <script src="{% static 'backendassets/js/pages/form-fileuploads.init.js' %}"></script>
+
+
+    <script src="{% static 'backendassets/libs/select2/js/select2.min.js' %}"></script>
+
+    {% block scriptsblock %}
+    {% endblock %}
+
+</body>
+
+</html>

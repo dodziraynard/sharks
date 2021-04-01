@@ -1,0 +1,139 @@
+{% extends 'portal/base.html' %}
+{% block pagetabtitle %}Scholarship{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- End Scholarship Details -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'portal:scholarships' %}">Scholarships</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Add/Update Scholarship</li>
+                    </ol>
+                  </nav>
+
+                <h1>Add/Update Scholarship</h1>
+
+                <div class="col-md-12 col-lg-12 col-sm-12">
+
+                    <form class="modal-body" id="scholarship-form" action="{% url 'portal:scholarship_create_update' %}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{id}}">
+
+                         {% if message %}
+                        <div class="col-md-7 mx-auto alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Info! </strong> {{message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+
+                        {% if error_message %}
+                        <div class="col-md-7 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error! </strong> {{error_message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        <!-- scholarship title -->
+                        <div class="form-group row mb-3">
+                            <label for="title" class="col-3 col-form-label">Scholarship Title</label>
+                            <div class="col-8">
+                                <input type="text" name="title" value="{{title}}" class="form-control" id="title"
+                                    placeholder="Scholarship Title" required>
+                            </div>
+                        </div>
+
+                        <!-- short description -->
+                        <div class="form-group row mb-3">
+                            <label for="description" class="col-3 col-form-label">Description</label>
+                            <div class="col-8">
+                                <input type="text" value="{{description}}" class="form-control"
+                                    id="description" name="description" placeholder="Short Description" required>
+                            </div>
+                        </div>
+
+                        <!-- short location -->
+                        <div class="form-group row mb-3">
+                            <label for="location" class="col-3 col-form-label">Location</label>
+                            <div class="col-8">
+                                <input type="text" value="{{location}}" class="form-control"
+                                    id="location" name="location" placeholder="Location" required>
+                            </div>
+                        </div>
+
+                        <!-- scholarship website -->
+                        <div class="form-group row mb-3">
+                            <label for="url" class="col-3 col-form-label">Scholarship URL</label>
+                            <div class="col-8">
+                                <input type="url" name="url" value="{{url}}" class="form-control" id="url"
+                                    placeholder="Scholarship URL">
+                            </div>
+                        </div>
+
+
+                        <!-- scholarship image -->
+                        <div class="form-group row mb-3">
+                            <label for="image" class="col-3 col-form-label">Scholarship Image</label>
+                            <div class="col-8">
+                                {% if image %}
+                                    <span>Currently: {{image}}</span>
+                                {% endif %}
+                                <input type="file" name="image" class="form-control" id="image" {% if not image %} required {% endif %}>
+                            </div>
+                        </div>
+
+                        <!-- scholarship active -->
+                        <div class="form-group row mb-3">
+                            <label for="active" class="col-3 col-form-label">Active</label>
+                            <div class="col-8">
+                                <input type="checkbox" name="active" class="checkbox" {% if active or not id %} checked {% endif %} id="active" placeholder="Scholarship Active" >
+                            </div>
+                        </div>
+
+                         <!-- scholarship opens -->
+                         <div class="form-group row mb-3">
+                            <label for="opens" class="col-3 col-form-label">Scholarship Opens</label>
+                            <div class="col-8">
+                                <input type="date" name="opens" value="{{opens|date:'Y-m-d'}}" class="form-control" id="opens">
+                            </div>
+                        </div>
+
+
+                         <!-- scholarship closes -->
+                         <div class="form-group row mb-3">
+                            <label for="closes" class="col-3 col-form-label">Scholarship Closes</label>
+                            <div class="col-8">
+                                <input type="date" name="closes" value="{{closes|date:'Y-m-d'}}" class="form-control" id="closes">
+                            </div>
+                        </div>
+
+
+                        <!-- Delete and Submit button -->
+                        <div class="modal-footer">
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div>
+                                    <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                                        <span class="btn-label"><i class="mdi mdi-pencil"></i></span>Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Scholarship Details -->
+{% endblock %}

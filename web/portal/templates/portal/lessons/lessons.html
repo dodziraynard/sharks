@@ -1,0 +1,151 @@
+{% extends 'portal/base.html' %}
+{% block pagetabtitle %}Lessons{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- End Course Details -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  {% if course %}
+                  <li class="breadcrumb-item"><a href="{% url 'portal:courses' %}">All Courses</a></li>
+                  {% endif %}
+                  <li class="breadcrumb-item active" aria-current="page">All Lessons</li>
+                </ol>
+              </nav>
+                
+              {% if course %} 
+              <h1>{{course.title}}</h1>
+              
+              <a href="{% url 'portal:lesson_create_update' course.id %}" class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                <span class="btn-label"><i class="fa fa-plus"></i></span>Add Lessons
+              </a>
+              {% else %}
+                <h1>All Lessons</h1>
+               {% endif %}
+             
+                <hr>
+                <!-- Search bar -->
+                <form class="col-md-7 mx-auto mb-2">
+                  <div class="form-row">
+                    <div class="col-8">
+                      <input type="text" class="form-control" value="{{query}}" name="query" placeholder="Search for ...">
+                    </div>
+                    <div class="col-4">
+                      <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                  </div>
+                </form>
+
+                {% if request.message %}
+                <div class="col-md-7 mx-auto alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>Info! </strong> {{request.message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if request.error_message %}
+                <div class="col-md-7 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error! </strong> {{request.error_message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                <div class="col-md-12 col-lg-12 col-sm-12 row">
+                   {% for lesson in lessons %}
+                   <div class="card" style="width: 18rem; padding: 5px; border: 1px solid rgb(230, 230, 230);">
+                   <a href="{% url 'portal:lesson_quizzes' lesson.id %}">
+                    <img class="card-img-top" src="{{lesson.image.url}}" alt="{{lesson.title" style="height: 12em;">
+                    </a>
+                    <a href="{% url 'portal:lesson_quizzes' lesson.id %}" type="button" class="btn btn-secondary">
+                        Quizzes <span class="badge badge-light">{{lesson.quizzes.count}}</span>
+                        <span class="sr-only">unread messages</span>
+                    </a>
+                    <div class="card-body">
+                      <h5 class="card-title">{{lesson.title}}</h5>
+                      <p class="card-text">{{lesson.description}}</p>
+                      <a href="{% url 'portal:lesson_create_update' lesson.course.id %}?id={{lesson.id}}" class="btn btn-primary">Edit</a>
+                      <button data-toggle="modal" onclick="showDeletionModal('{{lesson.id}}')" class="btn btn-danger">Delete</button>
+                    </div>
+                  </div>
+                   {% endfor %}
+                </div>
+
+                {% if lessons.has_other_pages %}
+                <nav aria-label="Page navigation example">
+
+                <ul class="pagination justify-content-center">
+                  {% if lessons.has_previous %}
+                    <li class="page-item"><a  class="page-link" href="?page={{ lessons.previous_page_number }}">Previous</a></li>
+                  {% else %}
+                    <li class="page-item disabled page-link"><span>Previous</span></li>
+                  {% endif %}
+                  {% for i in lessons.paginator.page_range %}
+                    {% if lessons.number == i %}
+                      <li class="page-item page-link active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                      <li class="page-item"><a  class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                  {% if lessons.has_next %}
+                    <li class="page-item"><a  class="page-link" href="?page={{ lessons.next_page_number }}">Next</a></li>
+                  {% else %}
+                    <li class="page-item disabled page-link"><span>Next</span></li>
+                  {% endif %}
+                </ul>
+            </nav>
+
+              {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="LessonModal" tabindex="-1" role="dialog" aria-labelledby="LessonModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="LessonModalLabel">Delete Lesson</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{% url 'portal:lesson_delete' %}" method="POST"> 
+      <div class="modal-body">
+        {% csrf_token %}
+        <input type="hidden" name="lesson_id" id="lesson_id">
+        <strong class="text text-danger">This operation is irreversible. Continue?</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-danger">Yap</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block scriptsblock %}
+
+<script>
+  function showDeletionModal(lesson_id) {
+      document.getElementById("lesson_id").value = lesson_id
+      $("#LessonModal").modal("show");
+  }
+</script>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Sharks</string>
+    <string name="shark_app_name">🦈 Sharks</string>
+    <string name="scholarship_fragment_title">Scholarships</string>
+    <string name="find_fragment_title">Explore</string>
+    <string name="courses_fragment_title">Courses</string>
+    <string name="my_courses_fragment_title">My Courses</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="learn_more">Learn More</string>
+    <string name="level">Level</string>
+    <string name="description">Description</string>
+    <string name="resources">Resources</string>
+    <string name="quiz_start_info">There are %1$d questions in all. Each of them take averagely %2$d seconds to complete.</string>
+    <string name="quiz_lessons">My Quiz Lessons</string>
+    <string name="search_courses">Search courses</string>
+    <string name="search_scholarships">Search scholarships …</string>
+    <string name="skip_now">Skip Now</string>
+    <string name="sharks_explanation">Sharks is an Educational app for pre-tertiary Ghanaian students to take free tailored lessons based on the new NaCCA Curriculum.</string>
+    <string name="features">Features</string>
+    <string name="ft3">• New NaCCA Curriculum Courses.</string>
+    <string name="ft2">• Bundle for learners.</string>
+    <string name="ft5">• Books in PDF format.</string>
+    <string name="ft1">• Quizzes to keep you poised.</string>
+    <string name="more">• More here.</string>
+    <string name="rating">%1$.1f ★</string>
+    <string name="comments">%1$d 💬</string>
+    <string name="searcher_teachers">Search teachers …</string>
+    <string name="hey_login_now">Hey,\nLogin Now.</string>
+    <string name="find_scholarships">• Find Scholarships.</string>
+    <string name="no_items_found">No items found …</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="become_a_shark">Become a Shark</string>
+    <string name="i_am_teacher">I am teacher</string>
+    <string name="greeting">Hi %1$s! Tap to edit.</string>
+    <string name="save">Save</string>
+    <string name="contact">Contact</string>
+    <string name="email">Email</string>
+    <string name="location">Location</string>
+    <string name="about">About</string>
+    <string name="header">Header</string>
+    <string name="call">Call</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="profile">Profile</string>
+    <string name="quiz">Quiz</string>
+    <string name="user_background_image">User background image</string>
+    <string name="user_profile_photo">User profile photo.</string>
+    <string name="full_name">Full Name</string>
+    <string name="search_for_books">Search for books …</string>
+    <string name="library">Library</string>
+    <string name="education">Education</string>
+</resources>

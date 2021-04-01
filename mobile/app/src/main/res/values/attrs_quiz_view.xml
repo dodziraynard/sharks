@@ -1,0 +1,11 @@
+<resources>
+    <declare-styleable name="QuizView">
+        <attr name="questionTextSize" format="dimension" />
+        <attr name="optionsTextSize" format="dimension" />
+        <attr name="questionTextBackground" format="color|reference" />
+        <attr name="scoreIncrement" format="integer" />
+        <attr name="optionsBackground" format="color|reference" />
+        <attr name="questionTextColor" format="color" />
+        <attr name="optionsTextColor" format="color" />
+    </declare-styleable>
+</resources>

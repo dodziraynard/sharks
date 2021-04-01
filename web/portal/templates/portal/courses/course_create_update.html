@@ -1,0 +1,133 @@
+{% extends 'portal/base.html' %}
+{% block pagetabtitle %}Course List{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- End Course Details -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'portal:courses' %}">Courses</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Add/Update Course</li>
+                    </ol>
+                  </nav>
+
+                <h1>Add/Update Course</h1>
+
+                <div class="col-md-12 col-lg-12 col-sm-12">
+
+                    <form class="modal-body" id="course-form" action="{% url 'portal:course_create_update' %}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{id}}">
+
+                         {% if message %}
+                        <div class="col-md-7 mx-auto alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Info! </strong> {{message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+
+                        {% if error_message %}
+                        <div class="col-md-7 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error! </strong> {{error_message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        <!-- course title -->
+                        <div class="form-group row mb-3">
+                            <label for="title" class="col-3 col-form-label">Course
+                                Title</label>
+                            <div class="col-8">
+                                <input type="text" name="title" value="{{title}}" class="form-control" id="title"
+                                    placeholder="Course Title" required>
+                            </div>
+                        </div>
+
+                        <!-- short description -->
+                        <div class="form-group row mb-3">
+                            <label for="short_description" class="col-3 col-form-label">Short Description</label>
+                            <div class="col-8">
+                                <input type="text" value="{{short_description}}" class="form-control"
+                                    id="short_description" name="short_description" placeholder="Short Description" required>
+                            </div>
+                        </div>
+
+                        <!-- long description -->
+                        <div class="form-group row mb-3">
+                            <label for="long_description" class="col-3 col-form-label">Long Description</label>
+                            <div class="col-8">
+                                <textarea class="form-control" name="long_description" id="long_description" cols="30"
+                                    rows="10">{{long_description}}</textarea>
+                            </div>
+                        </div>
+
+                        <!-- course website -->
+                        <div class="form-group row mb-3">
+                            <label for="website" class="col-3 col-form-label">Course
+                                Website</label>
+                            <div class="col-8">
+                                <input type="url" name="website" value="{{website}}" class="form-control" id="website"
+                                    placeholder="Course Website">
+                            </div>
+                        </div>
+
+                        <!-- course level -->
+                        <div class="form-group row mb-3">
+                            <label for="level" class="col-3 col-form-label">Course
+                                Level</label>
+                            <div class="col-8">
+                                <input type="number" name="level" class="form-control" value="{{level}}" id="level"
+                                    placeholder="Course Level" required>
+                            </div>
+                        </div>
+
+                        <!-- course image -->
+                        <div class="form-group row mb-3">
+                            <label for="image" class="col-3 col-form-label">Course
+                                Image</label>
+                            <div class="col-8">
+                                {% if image %}
+                                    <span>Currently: {{image}}</span>
+                                {% endif %}
+                                <input type="file" name="image" class="form-control" id="image" {% if not image %} required {% endif %}>
+                            </div>
+                        </div>
+
+                        <!-- course active -->
+                        <div class="form-group row mb-3">
+                            <label for="active" class="col-3 col-form-label">Active</label>
+                            <div class="col-8">
+                                <input type="checkbox" name="active" class="checkbox" {% if active or not id %} checked {% endif %} id="active" placeholder="Course Active" >
+                            </div>
+                        </div>
+
+                        <!-- Delete and Submit button -->
+                        <div class="modal-footer">
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div>
+                                    <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                                        <span class="btn-label"><i class="mdi mdi-pencil"></i></span>Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Course Details -->
+{% endblock %}

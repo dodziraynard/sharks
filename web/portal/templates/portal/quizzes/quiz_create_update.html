@@ -1,0 +1,128 @@
+{% extends 'portal/base.html' %}
+{% block pagetabtitle %}Course List{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'portal:lesson_quizzes' lesson.id %}">{{lesson.title}}</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Add/Update Quiz</li>
+                    </ol>
+                  </nav>
+
+                <h1>Add/Update Quiz</h1>
+                <div class="col-md-12 col-lg-12 col-sm-12">
+
+                    <form class="modal-body" id="lesson-form" action="{% url 'portal:quiz_create_update' lesson.id %}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{id}}">
+                        <input type="hidden" name="lesson" value="{{lesson.id}}">
+
+                         {% if message %}
+                        <div class="col-md-7 mx-auto alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Info! </strong> {{message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+
+                        {% if error_message %}
+                        <div class="col-md-7 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error! </strong> {{error_message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        <!-- quiz question -->
+                        <div class="form-group row mb-3">
+                            <label for="question" class="col-3 col-form-label">Question</label>
+                            <div class="col-8">
+                                <textarea class="form-control" name="question" id="question" cols="30"
+                                    rows="10">{{question}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label for="question" class="col-3 col-form-label">Duration in seconds</label>
+                            <div class="col-8">
+                               <input class="form-control" placeholder="e.g. 10" pattern="[0-9]{1,}" type="number" value="{{duration}}" name="duration" id="duration">
+                            </div>
+                        </div>
+
+                        {% if quiz.id %}
+                            <h5>Options</h5>
+                            {% for option in quiz.answer_options.all %}
+                            <div class="form-check form-check-inline">
+                                <a  href="{% url 'portal:delete_option' option.id %}" class="text text-danger fas fa-trash"></a> &thinsp;
+                                <input {% if option == quiz.correct_option %} checked {% endif %} class="form-check-input" id="option{{option.id}}" type="radio" name="correct_option" value="{{option.id}}">
+                                <label class="form-check-label" for="option{{option.id}}">{{option.text}}</label>
+                            </div>
+                            {% endfor %}
+                            <div class="form-check form-check-inline">
+                                <button type="button" data-toggle="modal" data-target="#OptionModal" class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                                    <i class="mdi mdi-plus"></i>
+                                </button>
+                            </div>
+                        {% endif %}
+                    
+                        <div class="modal-footer">
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div>
+                                    {% if quiz.id %}
+                                    <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                                        <span class="btn-label"><i class="mdi mdi-pencil"></i></span>Submit
+                                    </button>
+                                    {% else %}
+                                    <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                                        <span class="btn-label"><i class="mdi mdi-pencil"></i></span>Save and Add Options
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Course Details -->
+
+
+<!-- Modal -->
+{% if quiz.id %}
+<div class="modal fade" id="OptionModal" tabindex="-1" role="dialog" aria-labelledby="OptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="OptionModalLabel">Add Option</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'portal:add_option' quiz.id %}" method="POST"> 
+        <div class="modal-body">
+          {% csrf_token %}
+          <label for="text">Text</label>
+          <input class="form-control" type="text" name="text" id="text">
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                <span class="btn-label"><i class="mdi mdi-pencil"></i></span>Submit
+            </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

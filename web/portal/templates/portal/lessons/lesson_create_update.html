@@ -1,0 +1,124 @@
+{% extends 'portal/base.html' %}
+{% block pagetabtitle %}Course List{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'portal:course_lessons' course.id %}">{{course.title}}</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Add/Update Lesson</li>
+                    </ol>
+                  </nav>
+
+                <h1>Add/Update Lesson</h1>
+
+                <div class="col-md-12 col-lg-12 col-sm-12">
+
+                    <form class="modal-body" id="lesson-form" action="{% url 'portal:lesson_create_update' course.id %}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{id}}">
+                        <input type="hidden" name="course" value="{{course.id}}">
+
+                         {% if message %}
+                        <div class="col-md-7 mx-auto alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Info! </strong> {{message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+
+                        {% if error_message %}
+                        <div class="col-md-7 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error! </strong> {{error_message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        <!-- title -->
+                        <div class="form-group row mb-3">
+                            <label for="title" class="col-3 col-form-label">Lesson Title</label>
+                            <div class="col-8">
+                                <input type="text" name="title" value="{{title}}" class="form-control" id="title"
+                                    placeholder="Lesson Title" required>
+                            </div>
+                        </div>
+
+                        <!-- description -->
+                        <div class="form-group row mb-3">
+                            <label for="description" class="col-3 col-form-label">Description</label>
+                            <div class="col-8">
+                                <input type="text" value="{{description}}" class="form-control"
+                                    id="description" name="description" placeholder="Description" required>
+                            </div>
+                        </div>
+
+                        <!-- lesson note -->
+                        <div class="form-group row mb-3">
+                            <label for="note" class="col-3 col-form-label">Note</label>
+                            <div class="col-8">
+                                <textarea class="form-control" name="note" id="note" cols="30"
+                                    rows="10">{{note}}</textarea>
+                            </div>
+                        </div>
+
+                        <!-- Video url -->
+                        <div class="form-group row mb-3">
+                            <label for="video_url" class="col-3 col-form-label">Video URL</label>
+                            <div class="col-8">
+                                <input type="url" name="video_url" value="{{video_url}}" class="form-control" id="video_url"
+                                    placeholder="Video URL">
+                            </div>
+                        </div>
+
+                        
+                        <!-- video -->
+                        <div class="form-group row mb-3">
+                            <label for="image" class="col-3 col-form-label">Video file (Required if no video url)</label>
+                            <div class="col-8">
+                                {% if video_file %}
+                                    <span>Currently: {{video_file}}</span>
+                                {% endif %}
+                                <input type="file" name="video_file" class="form-control" id="video_file">
+                            </div>
+                        </div>
+
+                        <!-- image -->
+                        <div class="form-group row mb-3">
+                            <label for="image" class="col-3 col-form-label">Lesson Image</label>
+                            <div class="col-8">
+                                {% if image %}
+                                    <span>Currently: {{image}}</span>
+                                {% endif %}
+                                <input type="file" name="image" class="form-control" id="image" {% if not image %} required {% endif %}>
+                            </div>
+                        </div>
+
+                        <!-- Delete and Submit button -->
+                        <div class="modal-footer">
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div>
+                                    <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light mt-2 text-white">
+                                        <span class="btn-label"><i class="mdi mdi-pencil"></i></span>Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Course Details -->
+{% endblock %}
