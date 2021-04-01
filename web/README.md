@@ -1,5 +1,5 @@
 # Sharks
-This is the web app directory. The wbb app is built using Django framework and Python 3.8 programming language.
+This is the web app directory. The wbb app is built using Django framework and Python programming language.
 
 ## Language and Libraries
 - Python 3.8
