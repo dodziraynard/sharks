@@ -1,6 +1,6 @@
 # Sharks
 Sharks is an educational app that helps pre-tertiary Ghanaian students to take tailored lessons based on the new curriculum. 
-This repository is where I build the sharks app. The web app (`/web`) provides a dashboard through which contents can be added, updated, or deleted. The mobile client version  (`/mobile`) is the mobile app that students will use to access the contents as well.
+This repository is where I build the sharks app. The web app (`/web`) provides a dashboard through which contents can be added, updated, or deleted. The mobile client version  (`/mobile`) is the mobile app that students use to access the contents as well.
 
 ![sharks icon](screenshots/sharks-architecture.png)
 
