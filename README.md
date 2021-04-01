@@ -7,11 +7,11 @@ This repository is where I build the sharks app. The web app (`/web`) provides a
 # Web
 
 ## Language and Libraries
-- Python 3
+- Python 3.8
 - Django 3
 
 ## Installation
-Clone this repository and open it in an editor.
+Clone the repository and open it in an editor.
 ```bash
 git clone https://github.com/dodziraynard/sharks.git
 ```

@@ -1,7 +1,7 @@
 # Sharks
 This is the mobile app directory. The mobile app is built using android studio, native Android SDK, and Java programming language.
 
-![sharks launcher icon](sharks-architecture.png)
+![sharks launcher icon](ic_launcher-playstore.png)
 
 ## Language and Libraries
 - Java

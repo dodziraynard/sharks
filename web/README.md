@@ -1,11 +1,8 @@
 # Sharks
-Sharks is an educational app that helps pre-tertiary Ghanaian students to take tailored lessons based on the new curriculum. 
-This repository is where I build the backend (web app) of the sharks app. The web app provides a dashboard through which contents can be added, updated, or deleted. The mobile client version can be found at [Sharks Android App](https://github.com/dodziraynard/sharks-android) as well.
-
-![sharks icon](screenshots/sharks-architecture.png)
+This is the web app directory. The wbb app is built using Django framework and Python 3.8 programming language.
 
 ## Language and Libraries
-- Python 3
+- Python 3.8
 - Django 3
 
 ## Installation
