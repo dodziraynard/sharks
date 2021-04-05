@@ -111,7 +111,6 @@ public class StartViewModel extends AndroidViewModel {
                         prefsEditor.apply();
                         mIsLoggedIn.setValue(true);
                         insertStudent(response.body().getStudent());
-                        Log.d(TAG, "onResponse: "+response.body().getStudent().getUsername());
                     }
                     if (response.body().getTeacher() != null) {
                         mTeacher.setValue(response.body().getTeacher());
@@ -120,7 +119,6 @@ public class StartViewModel extends AndroidViewModel {
                         mIsLoggedIn.setValue(true);
                         insertTeacher(response.body().getTeacher());
                     }
-                    Log.d(TAG, "onResponse: ");
                 }
             }
 
