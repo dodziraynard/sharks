@@ -4,7 +4,8 @@ This is the mobile app directory. The mobile app is built using android studio, 
 ![sharks launcher icon](ic_launcher-playstore.png)
 
 ## Language and Libraries
-- Java 9.0
+- Java
+- Kotlin
 - Native Android SDK
 
 ## Installation

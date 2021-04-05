@@ -48,6 +48,7 @@ View the dashboard currently hosted on google cloud [here](http://34.67.115.110)
 
 ## Language and Libraries
 - Java
+- Kotlin
 - Native Android SDK
 
 ## Installation
