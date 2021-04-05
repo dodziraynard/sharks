@@ -55,4 +55,8 @@
     <string name="search_for_books">Search for books …</string>
     <string name="library">Library</string>
     <string name="education">Education</string>
+    <string name="forum">Forum</string>
+    <string name="failed_to_load_chats">Failed to load chats.</string>
+    <string name="empty_chat_error">Can\'t post empty message</string>
+    <string name="no_conversation_here">No conversations here.</string>
 </resources>

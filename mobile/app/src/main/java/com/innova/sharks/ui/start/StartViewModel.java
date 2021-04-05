@@ -24,6 +24,7 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 import static com.innova.sharks.AppRoomDatabase.databaseWriteExecutor;
 import static com.innova.sharks.utils.Constants.SHARED_PREFS_FILE;
+import static com.innova.sharks.utils.Constants.USERNAME;
 import static com.innova.sharks.utils.Constants.USER_ID;
 import static com.innova.sharks.utils.Constants.USER_TOKEN;
 
@@ -62,6 +63,7 @@ public class StartViewModel extends AndroidViewModel {
                     if (response.body().getStudent() != null) {
                         mStudent.setValue(response.body().getStudent());
                         prefsEditor.putLong(USER_ID, response.body().getStudent().getId());
+                        prefsEditor.putString(USERNAME, response.body().getStudent().getUsername());
                         prefsEditor.apply();
                         mIsLoggedIn.setValue(true);
                         insertStudent(response.body().getStudent());
@@ -105,9 +107,11 @@ public class StartViewModel extends AndroidViewModel {
                         mStudent.setValue(response.body().getStudent());
                         prefsEditor.putLong(USER_ID, response.body().getStudent().getId());
                         prefsEditor.putInt(Constants.STUDENT_LEVEL, response.body().getStudent().getLevel());
+                        prefsEditor.putString(USERNAME, response.body().getStudent().getUsername());
                         prefsEditor.apply();
                         mIsLoggedIn.setValue(true);
                         insertStudent(response.body().getStudent());
+                        Log.d(TAG, "onResponse: "+response.body().getStudent().getUsername());
                     }
                     if (response.body().getTeacher() != null) {
                         mTeacher.setValue(response.body().getTeacher());
@@ -116,6 +120,7 @@ public class StartViewModel extends AndroidViewModel {
                         mIsLoggedIn.setValue(true);
                         insertTeacher(response.body().getTeacher());
                     }
+                    Log.d(TAG, "onResponse: ");
                 }
             }
 

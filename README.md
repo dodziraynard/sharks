@@ -66,7 +66,7 @@ by changing the IP address in the `TEST_BASE_API_URL` constant.
     public static final String TEST_BASE_API_URL = "http://YOUR_LOCAL_TEST_IP:8000/api/v1.0/";
     ...
 ```
-- To test the app using the live backend server, either build the release version of the app or assign `http://34.67.115.110/api/v1.0/` to the `TEST_BASE_API_URL` constant.
+- Better still, you may test the app using the live backend server; either build the release version of the app or assign `http://34.67.115.110/api/v1.0/` to the `TEST_BASE_API_URL` constant.
 - Connect a real device or start the emulator.
 - Run the app from android studio.
 

@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sharks"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.library.PdfViewActivity"></activity>
+        <activity android:name=".ui.forum.ForumActivity"></activity>
+        <activity android:name=".ui.library.PdfViewActivity" />
         <activity android:name=".ui.update_profile.UpdateProfileActivity" />
         <activity android:name=".ui.teacher.TeacherDetailActivity" />
         <activity android:name=".ui.start.StartActivity" />

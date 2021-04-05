@@ -27,6 +27,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.innova.sharks.R;
 import com.innova.sharks.databinding.ActivityLessonBinding;
 import com.innova.sharks.models.Lesson;
+import com.innova.sharks.ui.forum.ForumActivity;
 
 import static com.innova.sharks.utils.Constants.LESSON_INTENT_LABEL;
 import static com.innova.sharks.utils.Constants.USER_AGENT;
@@ -51,6 +52,8 @@ public class LessonActivity extends AppCompatActivity {
 
         mFullscreenButton.setOnClickListener(view -> hideSystemUiFullScreen());
         mBinding.note.setText(mLesson.getNote());
+
+        mBinding.fab.setOnClickListener(view -> ForumActivity.Companion.starter(this, mLesson));
     }
 
     private void initializePlayer() {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64463422554",
+    "project_id": "sharks-307902",
+    "storage_bucket": "sharks-307902.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64463422554:android:3ba1a052cd717c55b1c463",
+        "android_client_info": {
+          "package_name": "com.innova.sharks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64463422554-pcd6rvfa7uhhldeainjvjjm8ejinquor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW4W6PAHfdplU49sQHVeBBHimTc-us2w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64463422554-pcd6rvfa7uhhldeainjvjjm8ejinquor.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

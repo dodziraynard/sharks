@@ -2,9 +2,10 @@ package com.innova.sharks.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
+import static com.innova.sharks.utils.Constants.CURRENT_CHAT_ADAPTER_POSITION;
 import static com.innova.sharks.utils.Constants.SHARED_PREFS_FILE;
+import static com.innova.sharks.utils.Constants.USERNAME;
 import static com.innova.sharks.utils.Constants.USER_ID;
 import static com.innova.sharks.utils.Constants.USER_TOKEN;
 
@@ -24,7 +25,11 @@ public class Functions {
 
     public static long getUserId(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS_FILE, Context.MODE_PRIVATE);
-        Log.d(TAG, "getUserId: " + prefs.getLong(USER_ID, -1L));
         return prefs.getLong(USER_ID, -1L);
+    }
+
+    public static String getUsername(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+        return prefs.getString(USERNAME, "");
     }
 }

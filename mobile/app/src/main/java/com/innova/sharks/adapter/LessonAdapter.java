@@ -15,6 +15,7 @@ import com.bumptech.glide.load.model.LazyHeaders;
 import com.innova.sharks.R;
 import com.innova.sharks.databinding.ItemLessonBinding;
 import com.innova.sharks.models.Lesson;
+import com.innova.sharks.ui.forum.ForumActivity;
 import com.innova.sharks.ui.quiz.QuizActivity;
 
 import java.util.ArrayList;
@@ -103,6 +104,10 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                 intent.putExtra(QUIZ_LESSON, lessons.get(getLayoutPosition()));
                 intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 mContext.startActivity(intent);
+            });
+
+            binding.forumTv.setOnClickListener(view -> {
+                ForumActivity.Companion.starter(mContext, lessons.get(getLayoutPosition()));
             });
         }
     }
