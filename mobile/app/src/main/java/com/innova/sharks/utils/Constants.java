@@ -5,8 +5,7 @@ public class Constants {
     public static final String LESSON_INTENT_LABEL = "com.innova.sharks.lessons";
     public static final String FRAGMENT_POSITION = "fragment_position";
     // TESTING BASE API URL
-//    public static final String TEST_BASE_API_URL = "http://10.18.172.201:8000/api/v1.0/";
-    public static final String TEST_BASE_API_URL = "http://34.67.115.110/api/v1.0/";
+    public static final String TEST_BASE_API_URL = "http://10.18.172.201:8000/api/v1.0/";
 
     public static final String IS_NEW_USER = "com.innova.sharks.new-user";
     public static final String STUDENT_LEVEL = "com.innova.sharks.student-id";
