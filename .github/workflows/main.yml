@@ -28,7 +28,7 @@ jobs:
 
           script: |
             cd sharks
-            git pull https://${{secrets.PAT}}:x-oauth-basic@github.com/dodziraynard/sharks.git
+            git pull https://${{secrets.GC_PAT}}:x-oauth-basic@github.com/dodziraynard/sharks.git
             cd web
             pip install -r requirements.txt
             python .\manage.py collectstatic
